@@ -1,4 +1,3 @@
-
 import { Achievement } from './types';
 
 export const ACHIEVEMENTS: Achievement[] = [

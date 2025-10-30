@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { GameEntry, Achievement } from '../types';
 import { Button } from './common/Button';

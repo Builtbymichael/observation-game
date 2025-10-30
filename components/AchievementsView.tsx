@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ACHIEVEMENTS } from '../achievements';
 import { AchievementBadge } from './common/AchievementBadge';

@@ -1,4 +1,3 @@
-
 export const MEMORY_FACTS: string[] = [
     "Exercising your memory helps strengthen neural pathways, making recall easier over time.",
     "The brain's ability to reorganize itself by forming new neural connections is called neuroplasticity. Games like this encourage it.",

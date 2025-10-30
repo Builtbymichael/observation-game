@@ -1,4 +1,3 @@
-
 export enum GameStatus {
   PENDING = 'PENDING',
   DUE = 'DUE',
