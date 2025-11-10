@@ -1,5 +1,3 @@
-const API_KEY = process.env.API_KEY
-
 export const getSuggestedQuestion = async (): Promise<string> => {
   try {
     const response = await fetch("/api/suggest-question")
