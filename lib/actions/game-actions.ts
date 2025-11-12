@@ -121,6 +121,8 @@ export async function getObservations(): Promise<GameEntry[]> {
     throw new Error("Not authenticated")
   }
 
+  console.log("[v0] Fetching observations for user:", user.id)
+
   const { data: observations, error } = await supabase
     .from("observations")
     .select("*")
@@ -128,6 +130,8 @@ export async function getObservations(): Promise<GameEntry[]> {
     .order("created_at", { ascending: false })
 
   if (error) throw error
+
+  console.log("[v0] Found observations count:", observations?.length || 0)
 
   return (observations || []).map((obs) => ({
     id: obs.id,
