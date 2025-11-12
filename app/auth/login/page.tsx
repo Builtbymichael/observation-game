@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import AuthPageLayout from "@/components/AuthPageLayout"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -40,54 +41,60 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <div className="flex flex-col gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl">Welcome Back</CardTitle>
-              <CardDescription>Sign in to continue your observation journey</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleLogin}>
-                <div className="flex flex-col gap-6">
-                  <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="m@example.com"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="password">Password</Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-                  {error && <p className="text-sm text-red-500">{error}</p>}
-                  <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading ? "Signing in..." : "Sign in"}
-                  </Button>
-                </div>
-                <div className="mt-4 text-center text-sm">
-                  Don&apos;t have an account?{" "}
-                  <Link href="/auth/sign-up" className="underline underline-offset-4">
-                    Sign up
-                  </Link>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </div>
+    <AuthPageLayout>
+      <Card>
+        <CardHeader className="space-y-1 sm:space-y-2">
+          <CardTitle className="text-xl sm:text-2xl">Welcome Back</CardTitle>
+          <CardDescription className="text-sm">Sign in to continue your observation practice</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleLogin}>
+            <div className="flex flex-col gap-4 sm:gap-6">
+              <div className="grid gap-2">
+                <Label htmlFor="email" className="text-sm">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="text-base touch-manipulation min-h-[44px]"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="password" className="text-sm">
+                  Password
+                </Label>
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="text-base touch-manipulation min-h-[44px]"
+                />
+              </div>
+              {error && <p className="text-xs sm:text-sm text-red-500">{error}</p>}
+              <Button
+                type="submit"
+                className="w-full text-sm sm:text-base touch-manipulation min-h-[44px]"
+                disabled={isLoading}
+              >
+                {isLoading ? "Signing in..." : "Sign in"}
+              </Button>
+            </div>
+            <div className="mt-4 text-center text-xs sm:text-sm">
+              Don&apos;t have an account?{" "}
+              <Link href="/auth/sign-up" className="underline underline-offset-4">
+                Sign up
+              </Link>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </AuthPageLayout>
   )
 }

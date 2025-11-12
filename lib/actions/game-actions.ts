@@ -19,6 +19,56 @@ export async function getUserProfile() {
   return profile
 }
 
+export async function updateUserProfile(updates: { name?: string; age?: number | null }) {
+  const supabase = await createServerClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error("Not authenticated")
+  }
+
+  const { data: existingProfile } = await supabase.from("profiles").select("id").eq("id", user.id).maybeSingle()
+
+  if (!existingProfile) {
+    const { data, error } = await supabase
+      .from("profiles")
+      .insert({
+        id: user.id,
+        email: user.email || "",
+        name: updates.name,
+        age: updates.age,
+      })
+      .select()
+      .single()
+
+    if (error) throw error
+
+    revalidatePath("/")
+    revalidatePath("/profile")
+    return data
+  }
+
+  // Update existing profile
+  const { data, error } = await supabase
+    .from("profiles")
+    .update({
+      name: updates.name,
+      age: updates.age,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", user.id)
+    .select()
+    .single()
+
+  if (error) throw error
+
+  revalidatePath("/")
+  revalidatePath("/profile")
+  return data
+}
+
 export async function getUserStats() {
   const supabase = await createServerClient()
   const {
