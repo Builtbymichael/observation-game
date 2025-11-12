@@ -91,6 +91,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onToggleTheme, currentTheme }) => {
   const [userName, setUserName] = useState<string | null>(null)
+  const [userEmail, setUserEmail] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -98,6 +99,8 @@ export const Header: React.FC<HeaderProps> = ({ onToggleTheme, currentTheme }) =
         const profile = await getUserProfile()
         if (profile?.name) {
           setUserName(profile.name)
+          setUserEmail(profile.email)
+          console.log("[v0] Header - Logged in as:", profile.name, profile.email)
         }
       } catch (error) {
         console.error("Failed to fetch user profile", error)
@@ -117,7 +120,11 @@ export const Header: React.FC<HeaderProps> = ({ onToggleTheme, currentTheme }) =
           <Link href="/" className="text-xl sm:text-2xl font-serif hover:opacity-80 transition-opacity">
             Observation
           </Link>
-          {userName && <span className="text-xs sm:text-sm text-muted-foreground hidden xs:inline">{userName}</span>}
+          {userName && (
+            <span className="text-xs sm:text-sm text-muted-foreground hidden xs:inline" title={userEmail || ""}>
+              {userName}
+            </span>
+          )}
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
           <Link

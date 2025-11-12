@@ -55,12 +55,11 @@ export default function SignUpPage() {
 
       if (error) throw error
 
-      // Check if email confirmation is disabled
-      if (data.user && !data.session) {
-        router.push("/auth/sign-up-success")
-      } else if (data.session) {
-        // Email confirmation is off, user is logged in immediately
+      if (data.session) {
         router.push("/")
+        router.refresh()
+      } else if (data.user && !data.session) {
+        router.push("/auth/sign-up-success")
       }
     } catch (error: unknown) {
       console.error("[v0] Signup error:", error)

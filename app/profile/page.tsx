@@ -27,6 +27,7 @@ export default function ProfilePage() {
           setName(profile.name || "")
           setAge(profile.age?.toString() || "")
           setEmail(profile.email || "")
+          console.log("[v0] Profile page - Current user:", profile.email, profile.name)
         }
       } catch (error) {
         setMessage({ type: "error", text: "Failed to load profile" })
@@ -90,6 +91,11 @@ export default function ProfilePage() {
           <CardHeader>
             <CardTitle className="text-2xl">Your Profile</CardTitle>
             <CardDescription>Update your personal information</CardDescription>
+            {email && (
+              <div className="mt-2 p-2 bg-muted rounded text-sm">
+                <strong>Logged in as:</strong> {email}
+              </div>
+            )}
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit}>
