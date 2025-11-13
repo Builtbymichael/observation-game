@@ -10,8 +10,8 @@ export default function AuthPageLayout({ children }: { children: React.ReactNode
     <div className="min-h-svh bg-background">
       <header className="border-b border-border">
         <div className="container mx-auto px-4 py-4 sm:py-6">
-          <Link href="/" className="text-xl sm:text-2xl font-semibold hover:opacity-80 transition-opacity">
-            Observation Game
+          <Link href="/" className="text-lg sm:text-xl font-semibold hover:opacity-80 transition-opacity">
+            The Observation Game
           </Link>
         </div>
       </header>
@@ -26,6 +26,9 @@ export default function AuthPageLayout({ children }: { children: React.ReactNode
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                 Train your observational skills and memory retention with personalized daily questions that adapt to
                 your learning curve.
+              </p>
+              <p className="text-xs sm:text-sm text-muted-foreground/70 italic leading-relaxed pt-2 border-t border-border/50">
+                Inspired by the observational training exercises in "The Thursday Murder Club" by Richard Osman
               </p>
             </div>
 

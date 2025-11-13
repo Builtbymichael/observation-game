@@ -117,8 +117,8 @@ export const Header: React.FC<HeaderProps> = ({ onToggleTheme, currentTheme }) =
     <header className="w-full max-w-2xl mx-auto px-3 py-2 sm:p-4 absolute top-0 left-1/2 -translate-x-1/2">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2 sm:gap-3">
-          <Link href="/" className="text-xl sm:text-2xl font-serif hover:opacity-80 transition-opacity">
-            Observation
+          <Link href="/" className="text-base sm:text-xl font-serif hover:opacity-80 transition-opacity">
+            The Observation Game
           </Link>
           {userName && (
             <span className="text-xs sm:text-sm text-muted-foreground hidden xs:inline" title={userEmail || ""}>

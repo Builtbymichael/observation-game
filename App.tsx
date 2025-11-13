@@ -8,6 +8,7 @@ import { OnboardingFlow } from "./components/OnboardingFlow"
 import { StreakMilestoneAnimation } from "./components/StreakMilestoneAnimation"
 import { DashboardView } from "./components/DashboardView"
 import { AchievementUnlockedToast } from "./components/AchievementUnlockedToast"
+import { getUserProfile } from "./lib/actions/game-actions"
 
 const Stat: React.FC<{ label: string; value: number }> = ({ label, value }) => (
   <div className="flex flex-col items-center">
@@ -30,8 +31,10 @@ const App: React.FC = () => {
     clearStreakMilestone,
     newlyUnlockedAchievement,
     clearNewlyUnlockedAchievement,
-    isLoading, // Added loading state from hook
+    isLoading,
   } = useGameState()
+
+  const [userName, setUserName] = useState<string>("there")
 
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") {
@@ -41,6 +44,20 @@ const App: React.FC = () => {
     }
     return "light"
   })
+
+  useEffect(() => {
+    const fetchUserName = async () => {
+      try {
+        const profile = await getUserProfile()
+        if (profile?.name) {
+          setUserName(profile.name)
+        }
+      } catch (error) {
+        console.error("Failed to fetch user name", error)
+      }
+    }
+    fetchUserName()
+  }, [])
 
   useEffect(() => {
     const root = window.document.documentElement
@@ -73,6 +90,7 @@ const App: React.FC = () => {
         unlockedAchievements={unlockedAchievements}
         onQuestionSet={setQuestion}
         onSubmitAnswer={submitAnswer}
+        userName={userName}
       />
     )
   }

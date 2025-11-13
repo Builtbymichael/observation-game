@@ -22,6 +22,7 @@ interface DashboardViewProps {
   unlockedAchievements: Achievement[]
   onQuestionSet: (question: string, answer: string, delayDays: number) => void
   onSubmitAnswer: (gameId: string, answer: string) => void
+  userName: string
 }
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
@@ -31,6 +32,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   unlockedAchievements,
   onQuestionSet,
   onSubmitAnswer,
+  userName,
 }) => {
   const [isSetQuestionModalOpen, setIsSetQuestionModalOpen] = useState(false)
   const [isAchievementsModalOpen, setIsAchievementsModalOpen] = useState(false)
@@ -57,6 +59,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         <Button onClick={() => setIsSetQuestionModalOpen(true)} className="text-sm sm:text-base whitespace-nowrap">
           + Set Observation
         </Button>
+      </div>
+
+      <div className="bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-lg p-3 sm:p-4 animate-fade-in">
+        <p className="text-sm sm:text-base text-foreground/80">
+          Welcome back, {userName}! Ready to challenge your memory today?
+        </p>
       </div>
 
       <div className="bg-secondary/30 border border-secondary rounded-lg p-3 sm:p-4 animate-fade-in">
